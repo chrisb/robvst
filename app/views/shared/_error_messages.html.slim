@@ -1,0 +1,5 @@
+- if error_messages.errors.any?
+  .error-messages
+    ul
+      - for message in error_messages.errors.full_messages
+        li <%= message %>

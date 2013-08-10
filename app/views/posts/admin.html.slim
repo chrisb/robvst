@@ -1,0 +1,16 @@
+= content_for(:title) { "Admin" }
+
+= form_for @post do |f|
+  = render partial: 'form', locals: { f: f, placeholder: "" }
+
+#posts
+  #drafts.col.active
+    h2 Drafts
+    ul data-items="#{@drafts.to_json(:only => [:id, :title])}"
+      = render partial: 'li', collection: @drafts
+  #published.col
+    h2 Live
+    ul data-items="#{@published.to_json(only: [:id, :title])}"
+      = render partial: 'li', collection: @published
+  .hide
+    = link_to '', new_post_path, id: 'new-post'

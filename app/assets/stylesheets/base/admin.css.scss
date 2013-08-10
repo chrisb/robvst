@@ -1,0 +1,493 @@
+@import "compass/css3";
+
+$admin-pad: 20px;
+$admin-bg: #f2f2f2;
+$admin-editing-bg: #fff;
+$admin-bar-bg: $admin-editing-bg;
+$admin-bar-border-color: #ddd;
+$admin-bar-border: darken($admin-bar-bg,6%);
+$theme: #d23e2f;
+
+$bar-height: 70px;
+$bar-button-width: 70px;
+$middle-buttons: 3;
+$middle-width: $bar-button-width * $middle-buttons;
+
+body.admin {
+  overflow: hidden;
+  background: $admin-bg;
+  @include transition(background .3s linear);
+
+  label {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 8px 0 0;
+  }
+
+  #edit-button {
+    z-index: 100000;
+    opacity: 0;
+
+    &:hover { opacity: 1; }}
+
+  &.moving {
+    #edit-button,
+    #save-button { opacity: 1; }
+  }
+}
+
+body.edit {
+  background: $admin-editing-bg;
+  
+  #admin {
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: fixed;
+      top: $admin-pad;
+      height: 1.5em;
+      z-index: 13;
+      width: 100%;
+      pointer-events: none;
+      @include background-image(linear-gradient(top, rgba($admin-editing-bg, 1), rgba($admin-editing-bg, 0)));
+    }
+
+    &:after {
+      top: auto;
+      bottom: $admin-pad + $bar-height;
+      @include background-image(linear-gradient(bottom, rgba($admin-editing-bg, 1), rgba($admin-editing-bg, 0)));
+    }
+
+    #post-editor {
+      bottom: $bar-height;
+      height: auto;
+    }
+
+    #text-title {
+      @include box-shadow(none);
+    }
+
+    #content-fieldset {
+      visibility: visible;
+    }
+  }
+}
+
+#content-fieldset {
+  position: relative;
+  border: none;
+  margin: 10px 0 0;
+  padding: 0;
+  visibility: hidden;
+  width: 100%;
+}
+
+#save-button {
+  background: $admin-bar-bg;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  position: absolute;
+  bottom: $bar-height / 2 - $admin-pad - 6;
+  right: 160px;
+  z-index: 10000;
+  border: none;
+  @include border-radius(8px);
+
+  &.dirty, &:hover {background:#ccc;}
+  &.saving {background:#ccba40;}
+  &.saved {background:#76be6a;}
+  &.error {background:#bc3c2b;}
+}
+
+#admin {
+  position: absolute;
+  top: $admin-pad;
+  left: $admin-pad;
+  right: $admin-pad;
+  bottom: $admin-pad;
+  overflow: hidden;
+
+  #text-title {
+    margin: 0 -10px;
+    background: #fff;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  #text-title, h1 {
+    pre,
+    textarea {
+      padding: 10px;
+      text-align: left;
+    }
+  }
+
+  #text-content {
+    pre, textarea {
+      margin-bottom: 20px;
+    }
+  }
+
+  #posts {
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .col {
+    width: 50%;
+    float: left;
+    padding: 0;
+    overflow: hidden;
+
+    &.active {
+      h2 {
+        color: #222;
+      }
+    }
+
+    h2 {
+      font-size: 18px;
+      padding: 4px 7px;
+      margin: 0 0 0 6px;
+      color: #999;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    ul {
+      margin: 0 -20px 0 0;
+      padding: 0 30px 80px 12px;
+      list-style: none;
+      overflow: scroll;
+    }
+
+    li {
+      position: relative;
+      line-height: 1.2em;
+      text-overflow: ellipsis;
+      max-height: 8.4em;
+      margin-bottom: .8em;
+      @include transition(all .1s linear);
+
+      &.hidden {
+        height: 0;
+        margin: 0;
+        overflow: hidden;
+
+        a {
+          opacity: 0;
+        }
+      }
+
+      &.selected {
+        &:before {
+          content: "";
+          width: 3px;
+          position: absolute;
+          top: 0;
+          left: -10px;
+          bottom: 0;
+          background: $theme;
+        }
+
+        a {
+          position: relative;
+          color: $theme;
+        }
+      }
+
+      &:hover .links {
+        visibility: visible;
+      }
+    }
+
+    a {
+      margin: 0;
+      max-width: 100%;
+      max-height: 8.8em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border: none;
+      display: block;
+      color: #888;
+      padding: 0;
+      opacity: 1;
+      margin-bottom: 4px;
+      @include transition(color .1s linear);
+
+      &:hover {color: #222;}
+    }
+  }
+
+  textarea, pre {
+    // margin: -3px 0; /* not sure why but prevents a slight scroll on multiline titles */
+    // padding: 3px 0;
+    margin: 0;
+    outline: 0;
+    border: 0;
+  }
+
+  .expandingArea {
+    position: relative;
+  }
+
+  .expandingArea > textarea,
+  .expandingArea > pre {
+    background: transparent;
+    white-space: pre-wrap;
+  }
+
+  .expandingArea > textarea {
+    /* The border-box box model is used to allow
+     * padding whilst still keeping the overall width
+     * at exactly that of the containing element.
+     */
+    @include box-sizing(border-box);
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .expandingArea.active > textarea {
+    /* Hide any scrollbars */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* Remove WebKit user-resize widget */
+    resize: none;
+  }
+
+  .expandingArea > pre {
+    display: none;
+  }
+
+  .expandingArea.active > pre {
+    display: block;
+    /* Hide the text; just using it for sizing */
+    visibility: hidden;
+  }
+}
+
+form .permalink {
+ position: absolute;
+ left: -34px;
+ top: 12px;
+ border: none;
+ color: #ddd;
+}
+
+.transition {
+  #bar {@include transition(all .2s ease-out);}
+}
+
+.split-section {
+  bottom: $bar-height;
+  position: fixed;
+
+  .inner {
+    padding: 10px 20px;
+  }
+}
+
+#post-editor {
+  padding: 10px;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  padding-right: 16px;
+  right: -16px;
+  bottom: $bar-height + 20;
+  width: auto;
+  position: absolute;
+
+  .inner {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+#post-preview {
+  background: #f0f4fc;
+  border-left: 1px solid #dbe3f1;
+  opacity: 0;
+  z-index: -1;
+  overflow: hidden;
+  overflow-y: auto;
+  top: 0;
+  right: -16px;
+  left: 50%;
+  padding-top: $admin-pad;
+
+  .inner {
+    width: auto;
+  }
+}
+
+#admin.preview {
+  #post-editor {
+    padding: 0 16px 0 0;
+    margin: 0 -16px 0 0;
+    right: 50%;
+    left: 0;
+
+    .inner {
+      margin: 0;
+      width: auto;
+    }
+  }
+
+  #post-preview {
+    z-index: 14;
+    opacity: 1;
+  }
+
+  #post_content:before {top: 0;}
+  #post_content:before,
+  #post_content:after {
+    width: 100%;
+  }
+}
+
+.preview #bar {
+  #back-button {
+    display: none;
+  }
+}
+
+#bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 14;
+  opacity: 1;
+  padding: 0 $admin-pad;
+  background: $admin-bar-bg;
+  border-top: 1px solid $admin-bar-border-color;
+  height: $bar-height;
+
+  a {
+    padding: 10px 10px 4px;
+    width: $bar-button-width;
+    line-height: 1.9em;
+    font-size: 14px;
+    color: darken($admin-bar-bg, 35%);
+    border: none;
+    display: block;
+    text-align: center;
+    float: left;
+
+    &:hover, &:hover:before {
+      color: $theme;
+    }
+  }
+
+  .middle {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -$middle-width / 2;
+    width: $middle-width;
+  }
+
+  .end {
+    position: absolute;
+    right: $admin-pad;
+    top: 0;
+  }
+
+  .menu:hover .sub-menu {
+    display: block;
+  }
+
+  .menu {
+    display: block;
+    float: left;
+    position: relative;
+  }
+
+  .sub-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: $bar-height - 10;
+    width: 340px;
+    margin: 0 0 0 -170px;
+    padding: 10px;
+    background: $admin-bar-bg;
+    @include border-top-radius(8px);
+    @include box-sizing(border-box);
+
+    li {
+      list-style: none;
+      line-height: 1em;
+      margin: 0;
+      padding: 0 0 4px 0;
+
+      a {
+        display: block;
+        width: 200px;
+        text-align: left;
+      }
+
+      span {
+        font-size: 14px;
+        display: block;
+        margin: 6px 0 8px;
+      }
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #999;
+      display: block;
+      margin: 0 0 6px 0;
+      text-transform: uppercase;
+    }
+
+    input[type=text] {
+      border: none;
+      padding: 6px;
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      width: 280px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+#post_title {
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+#post_draft {
+  position: relative;
+  margin: 0 20px 0 0;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  display: block;
+  font-size: 24px;
+}
+
+#line-height {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
