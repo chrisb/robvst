@@ -2,7 +2,7 @@ require 'kramdown'
 
 module ApplicationHelper
   def is_admin?
-    logged_in?
+    user_signed_in?
   end
 
   def markdown(text)

@@ -4,7 +4,6 @@ class UpdatedPublishedAts < ActiveRecord::Migration
       post.update_attributes(published_at: post.created_at)
     end
   end
-
   def down
   end
 end

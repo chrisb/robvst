@@ -1,5 +1,6 @@
 Obtvse::Application.routes.draw do
 
+  devise_for :users
   # Admin
   get '/admin' => 'posts#admin', as: 'admin'
   get 'logout' => 'sessions#destroy', as: 'logout'
