@@ -12,6 +12,8 @@ class Post < ActiveRecord::Base
   scope :previous, lambda { |post| where('published_at < ?', post.published_at).newest }
   scope :next, lambda { |post| where('published_at > ?', post.published_at).newest }
 
+  belongs_to :user
+
   before_save :update_published_at, :chronic_parse_date
 
   def to_param

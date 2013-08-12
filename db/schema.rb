@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130809232825) do
+ActiveRecord::Schema.define(version: 20130810003549) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -19,13 +19,6 @@ ActiveRecord::Schema.define(version: 20130809232825) do
     t.string   "uid",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "images", force: true do |t|
-    t.string   "image_file_name"
-    t.string   "image_file_size"
-    t.string   "image_content_type"
-    t.datetime "image_updated_at"
   end
 
   create_table "posts", force: true do |t|
@@ -40,7 +33,10 @@ ActiveRecord::Schema.define(version: 20130809232825) do
     t.integer  "parent"
     t.integer  "timespent"
     t.datetime "published_at"
+    t.integer  "user_id"
   end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "revisions", force: true do |t|
     t.integer  "version"
@@ -62,27 +58,27 @@ ActiveRecord::Schema.define(version: 20130809232825) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
   create_table "users", force: true do |t|
-    t.string   "username",                                    null: false
-    t.string   "email"
-    t.string   "crypted_password"
-    t.string   "salt"
+    t.string   "name"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "twitter"
+    t.string   "github"
+    t.string   "ga_id"
+    t.string   "about"
+    t.string   "avatar"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
-    t.string   "reset_password_token"
-    t.datetime "reset_password_token_expires_at"
-    t.datetime "reset_password_email_sent_at"
-    t.datetime "last_login_at"
-    t.datetime "last_logout_at"
-    t.datetime "last_activity_at"
-    t.integer  "failed_logins_count",             default: 0
-    t.datetime "lock_expires_at"
-    t.string   "last_login_from_ip_address"
   end
 
-  add_index "users", ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at"
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

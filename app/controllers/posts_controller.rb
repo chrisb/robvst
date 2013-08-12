@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :require_login, except: [:index, :show, :admin]
+  before_filter :authenticate_user!, except: [:index, :show, :admin]
   layout 'admin', except: [:index, :show]
 
   def index
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     @single_post = true
     @post = Post.find_by_slug(params[:id]) || not_found
 
-    not_found if @post.draft and !logged_in?
+    not_found if @post.draft and !user_signed_in?
 
     @next = Post.next(@post).last
     @previous = Post.previous(@post).first
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   end
 
   def admin
-    if logged_in?
+    if user_signed_in?
       @no_header = true
       @post = Post.new
       @published = Post.where(draft:false).order('published_at desc')
@@ -58,6 +58,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params.require(:post).permit!)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save

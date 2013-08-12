@@ -1,15 +1,7 @@
 class User < ActiveRecord::Base
-  authenticates_with_sorcery!
-
-  validates_confirmation_of :password
-  validates_presence_of :password, on: :create
-  validates_uniqueness_of :email
-
-  before_create :set_username_to_email_name
-
-  private
-
-  def set_username_to_email_name
-    self.username = email.gsub(/[@].*/, '')
-  end
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 end
