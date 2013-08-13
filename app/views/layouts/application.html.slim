@@ -16,13 +16,13 @@ html lang="en-US"
       - unless @no_header
         header.clearfix
           #cover
-            javascript:
-              jQuery(function(){
-                var img = new Image();
-                img.onload = function() { Pixastic.process(img, "blurfast", {amount:0.5}); }
-                jQuery('#cover').append(img);
-                img.src = "http://urbanfragment.files.wordpress.com/2012/10/m31-the-andromeda-galaxy-camerawork-by-adam-evans-ferante-edit.jpg";
-              });
+            / javascript:
+            /   jQuery(function(){
+            /     var img = new Image();
+            /     img.onload = function() { Pixastic.process(img, "blurfast", {amount:0.5}); }
+            /     jQuery('#cover').append(img);
+            /     img.src = "http://urbanfragment.files.wordpress.com/2012/10/m31-the-andromeda-galaxy-camerawork-by-adam-evans-ferante-edit.jpg";
+            /   });
           = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
           #header-content
             h1= link_to current_blog.name, root_path
