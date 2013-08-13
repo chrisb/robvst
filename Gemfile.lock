@@ -254,7 +254,7 @@ DEPENDENCIES
   jquery-rails (~> 2)
   kaminari (~> 0.14)
   kramdown (~> 1.0)
-  libv8 (~> 3.16)
+  libv8
   mini_magick
   pg (~> 0.14)
   quiet_assets
