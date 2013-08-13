@@ -28,7 +28,7 @@ gem 'chronic', '~> 0.8'
 gem 'stringex', '~> 2', github: 'rsl/stringex'
 
 gem 'libv8' #, '~>3.16'
-gem 'therubyracer', `hostname`.include?('shadow.io') ? '~>11' : { github: 'cowboyd/therubyracer' }  # If using Ruby
+gem 'therubyracer', `hostname`.include?('shadow.io') ? '0.11.3' : { github: 'cowboyd/therubyracer' }  # If using Ruby
 
 platform :jruby do
   gem 'trinidad'
