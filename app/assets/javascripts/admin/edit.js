@@ -178,7 +178,9 @@ function savePost(callback) {
 
       // If we just finished creating a new post
       if (!state.post) {
-        setFormAction('/' + data.id);
+        console.log("WE JUST GOT BACK:");
+        console.log(data);
+        setFormAction('/posts/' + data.id);
         setFormMethod('put');
       }
 
