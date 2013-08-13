@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-Robvst::Application.config.session_store :cookie_store, key: '_robvst_session', domain: :all
+Robvst::Application.config.session_store :cookie_store, key: '_robvst_session', domain: ".#{Robvst::Application.config.blog[:domain]}"
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
