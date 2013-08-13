@@ -27,6 +27,9 @@ gem 'kaminari', '~> 0.14'
 gem 'chronic', '~> 0.8'
 gem 'stringex', '~> 2', github: 'rsl/stringex'
 
+gem 'libv8', '~>3.16'
+gem 'therubyracer', github: 'cowboyd/therubyracer'  # If using Ruby
+
 platform :jruby do
   gem 'trinidad'
   gem 'activerecord-jdbcpostgresql-adapter'
@@ -45,6 +48,7 @@ group :development, :test do
   gem 'sqlite3', '~> 1', platform: [:ruby, :mswin, :mingw]
   gem 'capistrano'
   gem 'capistrano_colors'
+  gem 'capistrano-unicorn'
   gem 'quiet_assets'
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
