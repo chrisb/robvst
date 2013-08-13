@@ -5,3 +5,17 @@
  *= require_tree ./base
  *= require theme
 */
+
+.small {
+  font-size: 0.8em;
+}
+
+.muted {
+  color: #aaa;
+}
+
+form#new_user {
+  input[type=text], input[type=email], input[type=password] {
+    margin-bottom: 1.2em;
+  }
+}

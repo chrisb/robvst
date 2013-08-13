@@ -15,7 +15,7 @@ body {
   word-wrap: break-word;
 }
 
-/* Typekit hiding sheet */
+/* Typekit hiding sheet
 #sheet {
   position: fixed;
   top: 0;
@@ -26,7 +26,7 @@ body {
   z-index: 100000;
   opacity: 1;
   @include transition(all ease-in .2s);
-}
+} */
 
 .wf-active,
 .wf-inactive {
@@ -96,18 +96,19 @@ aside {
   }
 }
 
-#edit-button {
+#controls {
   display: block;
   overflow: hidden;
   position: fixed;
   top: 1em;
   right: 1em;
   z-index: 100;
-  color: #ddd;
-  @include transition(all .3s ease-in);
-
-  &:hover {
-    color: $theme;
+  & a {
+    color: #ddd;
+    @include transition(all .3s ease-in);
+    &:hover {
+      color: $theme;
+    }
   }
 }
 

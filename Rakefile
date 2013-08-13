@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Obtvse::Application.load_tasks
+Robvst::Application.load_tasks

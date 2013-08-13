@@ -1,4 +1,4 @@
-Obtvse::Application.configure do
+Robvst::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Automatically inject JavaScript needed for LiveReload
@@ -29,4 +29,13 @@ Obtvse::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Set up configuration for your blog network!
+  #
+  config.blog = {
+    :name   => 'robvst',
+    :domain => 'lvh.me',
+    :ga_id  => nil
+  }
+
 end

@@ -38,7 +38,7 @@ class PostsController < ApplicationController
       @published = Post.where(draft:false).order('published_at desc')
       @drafts = Post.where(draft:true).order('updated_at desc')
     else
-      render 'sessions/new'
+      redirect_to new_user_session_url(host:blog_config[:domain])
     end
   end
 
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.where(slug: params[:id], user: current_user).first
     @post_path = post_path(@post)
   end
 

@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title INFO['title']
+    xml.title "#{current_blog.name} on #{Robvst::Application.config.blog[:name]}"
     xml.description INFO['tagline']
     xml.link root_path
 

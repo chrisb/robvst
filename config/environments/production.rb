@@ -1,4 +1,4 @@
-Obtvse::Application.configure do
+Robvst::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -61,5 +61,13 @@ Obtvse::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Set up configuration for your blog network!
+  #
+  config.blog = {
+    :name   => 'robvst',
+    :domain => 'robvst.com',
+    :ga_id  => nil
+  }
 
 end

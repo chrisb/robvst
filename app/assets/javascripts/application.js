@@ -7,3 +7,4 @@
 //= require prettify/lang-css
 //= require prettify/lang-sql
 //= require main
+//= require pixastic.custom

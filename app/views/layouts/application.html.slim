@@ -1,37 +1,45 @@
 doctype html
-/! Font thanks to Font Awesome - http://fortawesome.github.com/Font-Awesome
 html lang="en-US"
   head
     title= html_title yield(:title)
     = csrf_meta_tag
     = stylesheet_link_tag 'application'
-    meta content=INFO['name'] name="author"
+    meta content=current_blog.name name="author"
     link href="#{rss_path}" rel="alternate" title="RSS" type="application/rss+xml"
     link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'
     = javascript_include_tag 'application'
-    = render partial: 'application/typekit'
+    /= render partial: 'application/typekit'
   body class="#{controller_name} #{action_name} #{user_signed_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #sheet
     #body
       = render partial: 'shared/edit_button', locals: { icon: 'edit' }
       - unless @no_header
         header.clearfix
+          #cover
+            javascript:
+              jQuery(function(){
+                var img = new Image();
+                img.onload = function() { Pixastic.process(img, "blurfast", {amount:0.5}); }
+                jQuery('#cover').append(img);
+                img.src = "http://urbanfragment.files.wordpress.com/2012/10/m31-the-andromeda-galaxy-camerawork-by-adam-evans-ferante-edit.jpg";
+              });
           = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
           #header-content
-            h1= link_to INFO['name'], root_path
-            p= INFO['about'].html_safe
-            .twitter
-              a href="https://twitter.com/#{INFO['twitter']}" class="twitter-follow-button" data-show-count="false" data-dnt="true" Follow @#{INFO['twitter']}
-              javascript:
-                $('#twitter-wjs').remove();
-                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+            h1= link_to current_blog.name, root_path
+            p= current_blog.about.html_safe if current_blog.about.present?
+            - if current_blog.twitter.present?
+              .twitter
+                a href="https://twitter.com/#{current_blog.twitter}" class="twitter-follow-button" data-show-count="false" data-dnt="true" Follow @#{current_blog.twitter}
+                javascript:
+                  $('#twitter-wjs').remove();
+                  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
             ul#connect.clearfix
-              - if INFO['twitter']
-                li= link_to "@#{INFO['twitter']}", "http://twitter.com/#{INFO['twitter']}", class: 'icon-twitter', id: 'connect-twitter'
-              - if INFO['github']
-                li= link_to 'github', "https://github.com/#{INFO['github']}", class: 'icon-github', id: 'connect-github'
-              - if INFO['email']
-                li.right= link_to 'email', "mailto:#{INFO['email']}", class: 'icon-envelope', id: 'connect-email'
+              - if current_blog.twitter.present?
+                li= link_to "@#{current_blog.twitter}", "http://twitter.com/#{current_blog.twitter}", class: 'icon-twitter', id: 'connect-twitter'
+              - if current_blog.github.present?
+                li= link_to 'github', "https://github.com/#{current_blog.github}", class: 'icon-github', id: 'connect-github'
+              - if current_blog.email
+                li.right= link_to 'email', "mailto:#{current_blog.email}", class: 'icon-envelope', id: 'connect-email'
               li.right= link_to 'rss', rss_path, class: 'open-external icon-rss', id: 'connect-rss'
       - if notice
         #dialog.notice.inner= notice
@@ -48,9 +56,9 @@ html lang="en-US"
         - else
           = render 'sessions/new_form'
     / Google Analytics
-    - if INFO['ga_id']
+    - if current_blog.ga_id
       javascript:
-        var _gaq=[['_setAccount',' #{INFO['ga_id']} '],['_trackPageview']];
+        var _gaq=[['_setAccount',' #{current_blog.ga_id} '],['_trackPageview']];
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)}(document,'script'));

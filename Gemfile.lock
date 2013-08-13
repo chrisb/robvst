@@ -43,6 +43,11 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
+    better_errors (0.7.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     builder (3.1.4)
     capistrano (2.15.5)
       highline
@@ -71,6 +76,7 @@ GEM
       sass (~> 3.1)
     compass-rails (2.0.alpha.0)
       compass (>= 0.12.2, < 0.14)
+    debug_inspector (0.0.2)
     devise (3.0.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -221,6 +227,8 @@ DEPENDENCIES
   activerecord-session_store
   aws-sdk (~> 1.3.4)
   bcrypt-ruby (~> 3.0.0)
+  better_errors
+  binding_of_caller
   capistrano
   capistrano_colors
   carrierwave
