@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   layout 'admin', except: [:index, :show]
 
   def index
-    @posts = Post.published.newest.page(params[:page]).per(8)
+    @posts = Post.by(current_blog).published.newest.page(params[:page]).per(8)
 
     respond_to do |format|
       format.html
@@ -14,12 +14,12 @@ class PostsController < ApplicationController
 
   def show
     @single_post = true
-    @post = Post.find_by_slug(params[:id]) || not_found
+    @post         = Post.by(current_blog).where(slug:params[:id]).first || not_found
 
     not_found if @post.draft and !user_signed_in?
 
-    @next = Post.next(@post).last
-    @previous = Post.previous(@post).first
+    @next     = Post.by(current_blog).next(@post).last
+    @previous = Post.by(current_blog).previous(@post).first
 
     respond_to do |format|
       if @post.present?
@@ -34,9 +34,9 @@ class PostsController < ApplicationController
   def admin
     if user_signed_in?
       @no_header = true
-      @post = Post.new
-      @published = Post.where(draft:false).order('published_at desc')
-      @drafts = Post.where(draft:true).order('updated_at desc')
+      @post      = Post.new
+      @published = Post.by(current_user).where(draft:false).order('published_at desc')
+      @drafts    = Post.by(current_user).where(draft:true).order('updated_at desc')
     else
       redirect_to new_user_session_url(host:blog_config[:domain])
     end
@@ -75,6 +75,7 @@ class PostsController < ApplicationController
 
   def update
     @post = params[:id].to_i.to_s == params[:id] ? Post.find(params[:id]) : Post.find_by_slug(params[:id])
+    raise "cant" unless @post.user == current_user
     logger.info @post
 
     respond_to do |format|
@@ -92,6 +93,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by_slug(params[:id])
+    raise "cant" unless @post.user == current_user
     @post.destroy
     flash[:notice] = 'Post has been deleted'
 
@@ -103,7 +105,8 @@ class PostsController < ApplicationController
 
   private
 
-  def admin?
-    session[:admin] == true
-  end
+    def admin?
+      session[:admin] == true
+    end
+
 end

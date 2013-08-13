@@ -1,16 +1,19 @@
 class Post < ActiveRecord::Base
 
-  validates :slug, presence: true, uniqueness: true
+  validates_presence_of :slug
+  validates_uniqueness_of :slug, scope: :user_id
+
   validates :title, presence: true
 
   acts_as_url :title, :url_attribute => :slug
 
-  scope :unpublished, where(draft: true)
-  scope :published, where(draft: false)
-  scope :newest, order('published_at desc')
-  scope :oldest, order('published_at asc')
-  scope :previous, lambda { |post| where('published_at < ?', post.published_at).newest }
-  scope :next, lambda { |post| where('published_at > ?', post.published_at).newest }
+  scope :unpublished, -> { where draft: true }
+  scope :published,   -> { where draft: false }
+  scope :newest,      -> { order 'published_at DESC' }
+  scope :oldest,      -> { order 'published_at ASC' }
+  scope :previous,    lambda { |post| where('published_at < ?', post.published_at).newest }
+  scope :next,        lambda { |post| where('published_at > ?', post.published_at).newest }
+  scope :by,          lambda { |user| where user: user }
 
   belongs_to :user
 
