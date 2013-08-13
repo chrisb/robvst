@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   protected
 
     def generate_subdomain
+      return if subdomain.present?
       self.subdomain = name.to_s.parameterize
       i = 0
       while User.exists?(subdomain:self.subdomain) do

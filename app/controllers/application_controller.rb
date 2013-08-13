@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :resolve_subdomain
   before_filter :get_user
-  helper_method :no_users?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  helper_method :no_users?, :blog_config
 
   layout :resolve_layout
 
@@ -50,12 +52,15 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :name, :password, :password_confirmation, :subdomain) }
+    end
+
     def current_blog
       @current_blog
     end
 
     def resolve_subdomain
-      Rails.logger.info "===> #{request.subdomain}"
       return if request.subdomains.empty? || request.subdomains.include?('www')
       @current_blog = User.find_by_subdomain(request.subdomains.last)
       redirect_to root_url(host:Robvst::Application.config.blog[:domain]) unless @current_blog.present?

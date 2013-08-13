@@ -9,6 +9,11 @@
   </div>
 
   <div>
+    <%= f.label :subdomain %>
+    <%= f.text_field :subdomain, style: "width: 160px;" %>.<%= blog_config[:domain] %>
+  </div>
+
+  <div>
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
