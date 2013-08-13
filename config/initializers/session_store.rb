@@ -1,11 +1,8 @@
 # Be sure to restart your server when you modify this file.
-
-Robvst::Application.config.session_store :cookie_store, key: '_robvst_session', domain: ".#{Robvst::Application.config.blog[:domain]}"
-
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-Robvst::Application.config.session_store :active_record_store
+Robvst::Application.config.session_store :active_record_store, key: '_robvst_sess', domain: ".#{Robvst::Application.config.blog[:domain]}"
 
 # if Rails.env.production?
 #   require 'action_dispatch/middleware/session/dalli_store'
