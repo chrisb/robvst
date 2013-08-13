@@ -49,12 +49,12 @@ html lang="en-US"
         .inner
           = yield
       .avgrund-cover
-    - unless user_signed_in?
-      aside#modal-login.avgrund-popup
-        - if no_users?
-          = render 'users/new_form'
-        - else
-          = render 'sessions/new_form'
+    / - unless user_signed_in?
+    /   aside#modal-login.avgrund-popup
+    /     - if no_users?
+    /       = render 'users/new_form'
+    /     - else
+    /       = render 'sessions/new_form'
     / Google Analytics
     - if current_blog.ga_id
       javascript:

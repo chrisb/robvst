@@ -23,12 +23,12 @@ html lang="en-US"
       #content
         .inner= yield
       .avgrund-cover
-    - unless user_signed_in?
-      aside#modal-login.avgrund-popup
-        - if no_users?
-          = render 'users/new_form'
-        - else
-          = render 'sessions/new_form'
+    / - unless user_signed_in?
+    /   aside#modal-login.avgrund-popup
+    /     - if no_users?
+    /       = render 'users/new_form'
+    /     - else
+    /       = render 'sessions/new_form'
     / Google Analytics
     - if Robvst::Application.config.blog[:ga_id]
       javascript:
