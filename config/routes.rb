@@ -10,10 +10,12 @@ Robvst::Application.routes.draw do
   resources :users, :only => :show
 
   constraints(Subdomain) do
-    get '/'                => 'posts#index', as: :user_blog
-    get '/posts(.:format)' => 'posts#index'
+    # get '/'                => 'posts#index', as: :user_blog
+    # get '/posts(.:format)' => 'posts#index'
     get '/posts.rss'       => 'posts#index', as: 'rss'
     get '/admin'           => 'posts#admin', as: 'admin'
+    get '/:id'             => 'posts#show', as: :post
+    resources :posts, path: '/'
     resources :posts
   end
 
