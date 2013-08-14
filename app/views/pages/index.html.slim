@@ -12,4 +12,4 @@ div#welcome
   br
   p.small #{link_to 'Create an account', new_user_registration_path} to get started. Or, #{link_to 'log in', new_user_session_path} if you're already signed up.
   - if user_signed_in?
-    p.small Since you're logged in, #{link_to 'head on over to your blog', user_blog_url} if you'd like.
+    p.small Since you're logged in, #{link_to 'head on over to your blog', posts_url} if you'd like.
