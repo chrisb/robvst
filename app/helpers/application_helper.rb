@@ -2,10 +2,6 @@ require 'kramdown'
 
 module ApplicationHelper
 
-  def current_blog
-    User.first
-  end
-
   def is_admin?
     user_signed_in?
   end
