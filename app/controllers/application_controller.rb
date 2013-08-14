@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_user
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :no_users?, :blog_config
+  helper_method :no_users?, :blog_config, :current_blog
 
   layout :resolve_layout
 
