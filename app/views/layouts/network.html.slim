@@ -15,7 +15,8 @@ html lang="en-US"
         header.clearfix
           = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
           #header-content
-            h1= link_to Robvst::Application.config.blog[:name], root_path
+            = link_to image_tag('logo-small.png'), root_path
+            /h1= link_to Robvst::Application.config.blog[:name], root_path
       - if notice
         #dialog.notice.inner= notice
       - if alert
