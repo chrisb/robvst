@@ -5,6 +5,12 @@
     .notice
       - @post.errors.full_messages.each do |msg|
         = msg
+
+  - if defined?(show_prompt) && show_prompt
+    .prompt
+      b New Post
+      | &nbsp; Pick a title, any title...
+
   #text-title.expandingArea
     pre
       span

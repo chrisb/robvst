@@ -97,19 +97,25 @@ aside {
 }
 
 #controls {
+  text-align: right;
   display: block;
   overflow: hidden;
   position: fixed;
   top: 1em;
   right: 1em;
   z-index: 100;
+  font-size: 15px;
+  color: #ddd;
   & a {
     color: #ddd;
+    display: inline-block;
+    margin-right: 16px;
     @include transition(all .3s ease-in);
     &:hover {
       color: $theme;
     }
   }
+
 }
 
 .not-logged-in {

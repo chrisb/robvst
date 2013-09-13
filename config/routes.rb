@@ -10,6 +10,7 @@ Robvst::Application.routes.draw do
   resources :users, :only => :show
 
   constraints(Subdomain) do
+    get '/new'             => 'posts#new'
     get '/posts(.:format)' => 'posts#index'
     get '/posts.rss'       => 'posts#index', as: 'rss'
     get '/admin'           => 'posts#admin', as: 'admin'

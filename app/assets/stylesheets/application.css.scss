@@ -6,8 +6,25 @@
  *= require theme
 */
 
+.prompt {
+  margin-bottom: 12px;
+}
+
 .small {
   font-size: 0.8em;
+}
+
+header.admin {
+  width: 100%;
+  display: block;
+  background-color: #fff;
+  height: 64px;
+  text-align: left;
+  line-height: 64px;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 22px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 0px 22px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 0px 22px rgba(50, 50, 50, 0.75);
 }
 
 .muted {
