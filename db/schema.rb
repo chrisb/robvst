@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130812225906) do
+ActiveRecord::Schema.define(version: 20130917220416) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
     t.string   "provider",   null: false
     t.string   "uid",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs", force: true do |t|
+    t.integer  "user_id",          null: false
+    t.string   "subdomain",        null: false
+    t.string   "title",            null: false
+    t.string   "background"
+    t.string   "background_color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,6 +44,7 @@ ActiveRecord::Schema.define(version: 20130812225906) do
     t.integer  "timespent"
     t.datetime "published_at"
     t.integer  "user_id"
+    t.integer  "blog_id",                      null: false
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
@@ -76,7 +87,6 @@ ActiveRecord::Schema.define(version: 20130812225906) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "subdomain"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

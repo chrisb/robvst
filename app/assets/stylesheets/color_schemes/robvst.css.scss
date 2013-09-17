@@ -26,14 +26,6 @@ $header-icon: $header-color;
   a:link, a:visited, a:active { border-bottom: 1px solid lighten($theme, 45%); }
 }
 
-div#cover {
-  opacity: 0.5;
-  overflow: hidden;
-  img {
-    height: 100%;
-  }
-}
-
 header {
   text-align: center;
   position: fixed;
@@ -42,7 +34,7 @@ header {
   bottom: 0;
   width: $header-width;
   // background: $header-bg;
-  border-left: 1px solid #ddd;
+  // border-left: 1px solid #ddd;
 
   .inner {
     width: auto;

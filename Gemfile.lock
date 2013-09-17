@@ -72,6 +72,10 @@ GEM
       json (>= 1.7)
     chronic (0.9.1)
     chunky_png (1.2.8)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.1)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -87,10 +91,11 @@ GEM
     compass-rails (2.0.alpha.0)
       compass (>= 0.12.2, < 0.14)
     debug_inspector (0.0.2)
-    devise (3.0.0)
+    devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
@@ -143,6 +148,9 @@ GEM
       subexec (~> 0.2.1)
     mini_portile (0.5.1)
     minitest (4.7.5)
+    miro (0.2.3)
+      cocaine
+      oily_png
     multi_json (1.7.8)
     multi_xml (0.5.5)
     net-scp (1.1.2)
@@ -154,6 +162,8 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    oily_png (1.1.0)
+      chunky_png (~> 1.2.7)
     orm_adapter (0.4.0)
     pg (0.16.0)
     polyglot (0.3.3)
@@ -249,13 +259,14 @@ DEPENDENCIES
   coderay (~> 1.0)
   coffee-rails
   compass-rails (~> 2.0.alpha.0)
-  devise
+  devise (~> 3.1)
   guard-livereload
   jquery-rails (~> 2)
   kaminari (~> 0.14)
   kramdown (~> 1.0)
   libv8
   mini_magick
+  miro
   pg (~> 0.14)
   quiet_assets
   rack-livereload

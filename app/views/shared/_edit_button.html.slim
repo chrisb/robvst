@@ -1,8 +1,10 @@
 #controls
   - if user_signed_in?
-    = link_to "<i class='icon-home'></i> #{current_user.name}".html_safe, root_url
-    = link_to "<i class='icon-#{icon}'></i> Author".html_safe, admin_url, :'data-target' => '#modal-login', :'data-no-turbolink' => true, id: 'edit-button'
-    = link_to "<i class='icon-signout'></i> Log Out".html_safe, logout_url
+    = link_to "<i class='icon-home'></i> #{current_user.name}".html_safe, root_path
+    = link_to "<i class='icon-#{icon}'></i> Write".html_safe, admin_path, id: 'edit-button'
+    = link_to "<i class='icon-cog'></i> Settings".html_safe, settings_path, id: 'settings-button'
+    = link_to "<i class='icon-signout'></i> Log Out".html_safe, logout_path
+  /    = link_to "<i class='icon-#{icon}'></i> Write".html_safe, admin_url, :'data-target' => '#modal-login', :'data-no-turbolink' => true, id: 'edit-button'
   / - else
   /   = link_to 'Home', root_url
   /   = link_to 'Sign Up', new_user_registration_url

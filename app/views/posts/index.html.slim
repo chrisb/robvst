@@ -1,3 +1,4 @@
 - @list = true
 = render partial: @posts, locals: { collapsed: true }
 = paginate @posts
+= javascript_tag "$('article div.post').truncate({ max_length: 120 });"

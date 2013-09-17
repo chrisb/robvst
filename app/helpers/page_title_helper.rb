@@ -4,20 +4,20 @@ module PageTitleHelper
     return Robvst::Application.config.blog[:name] if params[:controller] == 'pages' || devise_controller?
 
     if content.present?
-      [content,current_blog.name].join(' - ')
+      [content,current_blog.title].join(' - ')
     else
-      current_blog.name
+      current_blog.title
     end
   end
 
   def page_title(content)
     return 'robvst' if params[:controller] == 'pages'
-    @title = content || current_blog.name
+    @title = content || current_blog.title
     render partial: 'name'
   end
 
   def linked_title
-    link_to current_blog.name, root_path
+    link_to current_blog.title, root_path
   end
 
 end

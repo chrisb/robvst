@@ -4,7 +4,7 @@ gem 'rails', '~> 4.0'
 gem 'activerecord-session_store'
 
 # Auth/users
-gem 'devise'
+gem 'devise', '~>3.1'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Frontend Utilities
@@ -14,6 +14,7 @@ gem 'jquery-rails', '~> 2'
 gem 'compass-rails', '~> 2.0.alpha.0'
 
 gem 'carrierwave'
+gem 'miro'
 gem 'mini_magick'
 
 # Markdown

@@ -8,3 +8,4 @@
 //= require prettify/lang-sql
 //= require main
 //= require pixastic.custom
+//= require jquery.truncator.js

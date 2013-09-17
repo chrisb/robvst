@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   before_create :generate_subdomain
 
+  has_one :blog
+
   protected
 
     def generate_subdomain

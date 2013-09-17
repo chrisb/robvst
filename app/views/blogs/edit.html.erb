@@ -1,0 +1,39 @@
+<%= javascript_include_tag 'blog_settings' %>
+<h1>Blog Settings</h1>
+
+<%= form_for current_blog, url: settings_url, html: { multipart: true } do |f| %>
+  <% if current_blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(current_blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% current_blog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :background %><br>
+    <%= image_tag(current_blog.background) if current_blog.background? %>
+    <%= f.file_field :background %>
+    <%= f.hidden_field :background_cache %>
+    </div>
+  <div class="field">
+    <%= f.label :background_color %><br>
+    <% if session[:background_colors].present? %>
+      <% session[:background_colors].each do |c| %>
+        <div style='width:25px;height:25px;display:inline-block;background-color:<%= c %>;' class='dominant-color' data-color='<%= c %>'></div>
+      <% end %>
+    <% end %>
+    <%= f.text_field :background_color %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

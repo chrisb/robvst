@@ -14,8 +14,6 @@ article id="post-#{post.id}" class="#{collapsed ? 'collapsed' : 'full'}"
       - else
         = link_to post.title, post
   time= post.published_at ? post.published_at.to_formatted_s(:day_month_year) : ''
-  - if !collapsed
-    .post
-      - if post.content
-        = markdown(post.content)
+  .post id=dom_id(post) class="#{'collapsed' if collapsed}"
+    = markdown(post.content)
   #edit-link.hide data-href="#{edit_post_path post.id}"

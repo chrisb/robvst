@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   layout 'admin', except: [:index, :show]
 
   def index
-    @posts = Post.by(current_blog).published.newest.page(params[:page]).per(8)
+    @posts = current_blog.posts.published.newest.page(params[:page]).per(8)
 
     respond_to do |format|
       format.html
@@ -14,12 +14,12 @@ class PostsController < ApplicationController
 
   def show
     @single_post = true
-    @post         = Post.by(current_blog).where(slug:params[:id]).first || not_found
+    @post         = current_blog.posts.where(slug:params[:id]).first || not_found
 
     not_found if @post.draft and !user_signed_in?
 
-    @next     = Post.by(current_blog).next(@post).last
-    @previous = Post.by(current_blog).previous(@post).first
+    @next     = current_blog.posts.next(@post).last
+    @previous = current_blog.posts.previous(@post).first
 
     respond_to do |format|
       if @post.present?

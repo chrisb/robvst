@@ -14,6 +14,62 @@
   font-size: 0.8em;
 }
 
+body {
+  background-size: cover;
+  background-attachment: fixed;
+  /* background-image: url('/assets/test_bg.jpg'); */
+}
+
+#blackout {
+  background-size: cover;
+  background-attachment: fixed;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  /*
+  -webkit-filter: blur(6px);
+  -moz-filter: blur(6px);
+  -o-filter: blur(6px);
+  -ms-filter: blur(6px);
+  filter: blur(6px);
+  */
+  opacity: 0.3;
+}
+
+#cover {
+  width: 100%;
+  height: 100%;
+  /* background-color: #aab782; */
+  opacity: 0.8;
+}
+
+.post.collapsed * {
+  font-size: 0.8em !important;
+}
+
+#cover.shadow {
+  /*-webkit-box-shadow: inset -8px 0px 30px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow:    inset -8px 0px 30px rgba(0, 0, 0, 0.9);
+  box-shadow:         inset -8px 0px 30px rgba(0, 0, 0, 0.9);*/
+}
+
+#effect {
+  background-size: cover;
+  background-attachment: fixed;
+  /* background-image: url('/assets/test_bg.jpg'); */
+  width: 100%;
+  height: 100%;
+  /*
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+  */
+}
+
 header.admin {
   width: 100%;
   display: block;

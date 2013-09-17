@@ -16,6 +16,7 @@ class Post < ActiveRecord::Base
   scope :by,          lambda { |user| where user: user }
 
   belongs_to :user
+  belongs_to :blog
 
   before_save :update_published_at, :chronic_parse_date
 

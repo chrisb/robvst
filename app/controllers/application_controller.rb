@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_user
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :no_users?, :blog_config, :current_blog
+  helper_method :no_users?, :blog_config, :current_blog, :current_author
 
   layout :resolve_layout
 
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def url_host
-    user_signed_in? ? "#{current_user.subdomain}.#{blog_config[:domain]}" : request.host
+    user_signed_in? ? "#{current_user.blog.subdomain}.#{blog_config[:domain]}" : request.host
   end
 
   def default_url_options
@@ -60,9 +60,13 @@ class ApplicationController < ActionController::Base
       @current_blog
     end
 
+    def current_author
+      current_blog.user
+    end
+
     def resolve_subdomain
       return if request.subdomains.empty? || request.subdomains.include?('www')
-      @current_blog = User.find_by_subdomain(request.subdomains.last)
+      @current_blog = Blog.find_by_subdomain(request.subdomains.last)
       redirect_to root_url(host:Robvst::Application.config.blog[:domain]) unless @current_blog.present?
     end
 
