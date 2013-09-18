@@ -14,6 +14,31 @@ $header-link: $theme;
 $header-home: #ccc;
 $header-icon: #fff;
 
+#login-form {
+  .logo {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  input[type=text], input[type=password], input[type=email] {
+    background-color: #fff;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 12px;
+    border-radius: 0px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#welcome {
+  margin-top: 15%;
+  border: 1px dashed #d6d6d6;
+  padding: 12px;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -25,7 +50,11 @@ body, textarea, input {
 }
 
 #body {
-  background: none;
+  overflow: scroll;
+  background-color: #fff;
+  height: 100% !important;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 body:before {
@@ -233,13 +262,16 @@ header {
   }
 
   #content {
-    margin: $content-pad auto;
+    /* margin: $content-pad auto;
     margin-left: $content-pad+$header-width;
-    padding: 0 0 0 $content-pad;
+    padding: 0 0 0 $content-pad; */
+
     width: 920px;
+    margin-left: auto;
+    margin-right: auto;
 
     .inner {
-      margin-right: $header-width + $content-pad;
+      // margin-right: $header-width + $content-pad;
     }
   }
 

@@ -15,12 +15,15 @@
 }
 
 body {
+  height: 100%;
+  overflow: hidden;
   background-size: cover;
   background-attachment: fixed;
   /* background-image: url('/assets/test_bg.jpg'); */
 }
 
-#blackout {
+#whiteout {
+  background-color: #fff;
   background-size: cover;
   background-attachment: fixed;
   top: 0;
@@ -28,14 +31,7 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  /*
-  -webkit-filter: blur(6px);
-  -moz-filter: blur(6px);
-  -o-filter: blur(6px);
-  -ms-filter: blur(6px);
-  filter: blur(6px);
-  */
-  opacity: 0.3;
+  opacity: 0.8;
 }
 
 #cover {

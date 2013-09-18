@@ -2,6 +2,20 @@ require 'kramdown'
 
 module ApplicationHelper
 
+  def avatar_url(user,size=48)
+    if user.avatar_url.present?
+      user.avatar_url
+    else
+      default_url = asset_url('guest.png')
+      gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+      "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=#{CGI.escape(default_url)}"
+    end
+  end
+
+  def icon(i)
+    content_tag :i, nil, class: "icon-#{i}"
+  end
+
   def is_admin?
     user_signed_in?
   end
@@ -25,7 +39,7 @@ module ApplicationHelper
       match = line.match(/^http.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*$/)
 
       if match
-        render partial: 'youtube.html', locals: { video: match[1] }
+        render 'shared/youtube', locals: { video: match[1] }
       else
         line
       end

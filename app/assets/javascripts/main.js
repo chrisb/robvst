@@ -47,7 +47,7 @@ $(function() {
   function pageActions() {
     prettyPrint();
 
-    $('.open-external, a[href^="http://"]').click(function(e) {
+    $('.open-external, article.post a[href^="http://"]').click(function(e) {
       e.preventDefault();
       window.open($(this).attr('href'));
     });

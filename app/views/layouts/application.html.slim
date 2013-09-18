@@ -1,67 +1,17 @@
 doctype html
 html lang="en-US"
   head
-    title= html_title yield(:title)
-    = csrf_meta_tag
-    = stylesheet_link_tag 'application'
+    = render partial: 'shared/head'
     meta content=current_blog.user.name name="author"
     link href="#{rss_path}" rel="alternate" title="RSS" type="application/rss+xml"
-    link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'
-    = javascript_include_tag 'application'
-    = render partial: 'application/typekit'
   body class="#{controller_name} #{action_name} #{user_signed_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #sheet
-    #blackout style="background-image:url(#{current_blog.background.url});" xstyle="background-color:#{current_blog.background_color}"
-    #body
-      = render partial: 'shared/edit_button', locals: { icon: 'edit' }
-      - unless @no_header
-        header.clearfix
-          #cover class="#{ 'shadow' if current_blog.background.present? }" style="background-color:#{current_blog.background_color}"
-            #effect style="background-image:url(#{current_blog.background.url});"
-            / javascript:
-            /   jQuery(function(){
-            /     var img = new Image();
-            /     img.onload = function() { Pixastic.process(img, "blurfast", {amount:0.5}); }
-            /     jQuery('#cover').append(img);
-            /     img.src = "http://urbanfragment.files.wordpress.com/2012/10/m31-the-andromeda-galaxy-camerawork-by-adam-evans-ferante-edit.jpg";
-            /   });
-          = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
-          #header-content
-            h1= link_to current_blog.title, root_path
-            h2= current_author.name
-            p= current_author.about.html_safe if current_author.about.present?
-            - if current_author.twitter.present?
-              .twitter
-                a href="https://twitter.com/#{current_author.twitter}" class="twitter-follow-button" data-show-count="false" data-dnt="true" Follow @#{current_author.twitter}
-                javascript:
-                  $('#twitter-wjs').remove();
-                  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-            ul#connect.clearfix
-              - if current_author.twitter.present?
-                li= link_to "@#{current_author.twitter}", "http://twitter.com/#{current_author.twitter}", class: 'icon-twitter', id: 'connect-twitter'
-              - if current_author.github.present?
-                li= link_to 'github', "https://github.com/#{current_author.github}", class: 'icon-github', id: 'connect-github'
-              - if current_author.email
-                li.right= link_to 'email', "mailto:#{current_author.email}", class: 'icon-envelope', id: 'connect-email'
-              li.right= link_to 'rss', rss_path, class: 'open-external icon-rss', id: 'connect-rss'
-      - if notice
-        #dialog.notice.inner= notice
-      - if alert
-        #dialog.alert.inner= alert
+    #body style="background-image:url(#{current_blog.background.url});"
+      #whiteout
+      = render partial: 'shared/controls'
+      = render partial: 'shared/sidebar' unless @no_header
+      = render partial: 'shared/flash'
       #content
-        .inner
-          = yield
+        .inner= yield
       .avgrund-cover
-    / - unless user_signed_in?
-    /   aside#modal-login.avgrund-popup
-    /     - if no_users?
-    /       = render 'users/new_form'
-    /     - else
-    /       = render 'sessions/new_form'
-    / Google Analytics
-    - if current_author.ga_id
-      javascript:
-        var _gaq=[['_setAccount',' #{current_author.ga_id} '],['_trackPageview']];
-        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
+    = render 'shared/google_analytics', locals: { ga_id: current_author.ga_id } if current_author.ga_id.present?

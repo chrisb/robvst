@@ -1,0 +1,12 @@
+#controls
+  - if user_signed_in?
+    = link_to "#{icon :home} #{current_user.name}".html_safe, root_url
+    = link_to "#{icon :edit} Write".html_safe, admin_url, id: 'edit-button'
+    = link_to "#{icon :cog} Settings".html_safe, settings_url, id: 'settings-button'
+    = link_to "#{icon :signout} Log Out".html_safe, logout_url
+  - else
+    - if current_author
+      | #{current_author.name} is writing on robvst. #{link_to "You can too", root_path}
+    - else
+      = link_to "#{icon :user} Create an account".html_safe, new_user_registration_path
+      = link_to "#{icon :signin} Log In".html_safe, new_user_session_path, class: 'modal', 'data-target' => '#login-form'

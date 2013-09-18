@@ -1,36 +1,18 @@
 doctype html
 html lang="en-US"
-  head
-    title= html_title yield(:title)
-    = csrf_meta_tag
-    = stylesheet_link_tag 'application'
-    link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'
-    = javascript_include_tag 'application'
-    = render partial: 'application/typekit'
+  head= render partial: 'shared/head'
   body class="#{controller_name} #{action_name} #{user_signed_in? ? '' : 'not-'}logged-in #{no_users? ? 'no-users' : ''}"
     #sheet
     #body
-      = render partial: 'shared/edit_button', locals: { icon: 'edit' }
-      - unless @no_header
-        header.clearfix
-          = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
-          #header-content
-            = link_to image_tag('logo-small.png'), root_path
-            /h1= link_to Robvst::Application.config.blog[:name], root_path
-      - if notice
-        #dialog.notice.inner= notice
-      - if alert
-        #dialog.alert.inner= alert
+      - if user_signed_in? && current_user.blog && current_user.blog.background.present?
+        #user-strip style="background-image:url(#{current_user.blog.background.url});"
+      = link_to image_tag('logo-small.png'), root_path, id: 'logo'
+      = render 'shared/controls'
+      = render 'shared/flash'
       #content
         .inner= yield
       .avgrund-cover
-    / - unless user_signed_in?
-    /   aside#modal-login.avgrund-popup
-    /     - if no_users?
-    /       = render 'users/new_form'
-    /     - else
-    /       = render 'sessions/new_form'
-    / Google Analytics
+      = yield :outer
     - if Robvst::Application.config.blog[:ga_id]
       javascript:
         var _gaq=[['_setAccount',' #{Robvst::Application.blog[:ga_id]} '],['_trackPageview']];

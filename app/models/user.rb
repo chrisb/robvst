@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   has_one :blog
 
+  mount_uploader :avatar, AvatarUploader
+
   protected
 
     def generate_subdomain

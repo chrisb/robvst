@@ -1,0 +1,23 @@
+header.clearfix
+  #cover class="#{ 'shadow' if current_blog.background.present? }" style="background-color:#{current_blog.background_color}"
+    #effect style="background-image:url(#{current_blog.background.url});"
+  = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
+  #header-content
+    = image_tag avatar_url(current_user), class: 'avatar'
+    h1= link_to current_blog.title, root_path
+    h2= current_author.name
+    p= current_author.about.html_safe if current_author.about.present?
+    - if current_author.twitter.present?
+      .twitter
+        a href="https://twitter.com/#{current_author.twitter}" class="twitter-follow-button" data-show-count="false" data-dnt="true" Follow @#{current_author.twitter}
+        javascript:
+          $('#twitter-wjs').remove();
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    ul#connect.clearfix
+      - if current_author.twitter.present?
+        li= link_to "@#{current_author.twitter}", "http://twitter.com/#{current_author.twitter}", class: 'icon-twitter', id: 'connect-twitter'
+      - if current_author.github.present?
+        li= link_to 'github', "https://github.com/#{current_author.github}", class: 'icon-github', id: 'connect-github'
+      - if current_author.email
+        li.right= link_to 'email', "mailto:#{current_author.email}", class: 'icon-envelope', id: 'connect-email'
+      li.right= link_to 'rss', rss_path, class: 'open-external icon-rss', id: 'connect-rss'

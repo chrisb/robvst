@@ -1,15 +1,24 @@
-br
-br
-br
-br
-br
 div#welcome
-  p 
-    b Robvst 
-    i.muted (roʊˈbʌst) 
-    | is an #{link_to 'open source', 'https://github.com/chrisb/robvst'} authoring platform that anyone can join.
-  p Share your vision; explore the world through new perspectives.
-  br
-  p.small #{link_to 'Create an account', new_user_registration_path} to get started. Or, #{link_to 'log in', new_user_session_path} if you're already signed up.
-  - if user_signed_in?
-    p.small Since you're logged in, #{link_to 'head on over to your blog', posts_url} if you'd like.
+  p
+    b Robvst
+    i.muted (roʊˈbʌst)&nbsp;
+    | is an #{link_to 'open source', 'https://github.com/chrisb/robvst'} authoring platform that anyone can join. Share your stories and vision; explore the world through new perspectives.
+  p.small
+    - unless user_signed_in?
+      | #{link_to 'Create an account', new_user_registration_path} to get started. Or, #{link_to 'log in', new_user_session_path, class: 'modal', 'data-target' => '#login-form'} if you're already signed up.
+    - else
+      p.small Since you're logged in, #{link_to 'head on over to your blog', posts_url} if you'd like.
+
+- content_for :outer do
+  #login-form.avgrund-popup
+    div.logo= image_tag 'logo.png'
+    h3 Sign In
+    br
+    = form_for :user, url: user_session_path do |f|
+      = f.email_field :email, :autofocus => true, placeholder: 'E-Mail Address', spellcheck: 'false', autocomplete: 'off'
+      = f.password_field :password, placeholder: 'Password'
+      div
+        = f.check_box :remember_me
+        = f.label :remember_me
+      div
+        = f.submit 'Sign In'

@@ -15,6 +15,24 @@ body {
   word-wrap: break-word;
 }
 
+.avatar {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin: 10px;
+  -webkit-box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, .5);
+          box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, .5);
+}
+
+#user-strip {
+  height: 20px;
+  overflow: hidden;
+  background-size: cover;
+  background-attachment: fixed;
+  border-bottom: 2px solid #fff;
+}
+
 /* Typekit hiding sheet
 #sheet {
   position: fixed;
@@ -96,14 +114,22 @@ aside {
   }
 }
 
-#controls {
-  text-align: right;
-  display: block;
-  overflow: hidden;
-  position: fixed;
+#controls, #logo {
+  position: absolute;
   top: 1em;
-  right: 1em;
   z-index: 100;
+  overflow: hidden;
+  display: block;
+}
+
+#logo {
+  left: 1em;
+}
+
+#controls {
+  padding-top: 18px;
+  right: 1em;
+  text-align: right;
   font-size: 15px;
   color: #ddd;
   & a {

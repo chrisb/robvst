@@ -1,19 +1,12 @@
 doctype html
 html lang="en-US"
   head
-    title= html_title yield(:title)
-    = csrf_meta_tag
-    = stylesheet_link_tag 'application'
+    = render partial: 'shared/head'
     = javascript_include_tag 'admin'
-    = render partial: 'application/typekit'
-    link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' rel='stylesheet' type='text/css'
   body class="admin #{action_name}"
-    / header.admin
-    /   = link_to image_tag('logo-small.png'), root_path
-    = render partial: 'shared/edit_button', locals: { icon: 'reorder' }
+    = render partial: 'shared/controls'
     #sheet
-    #admin
-      = yield
+    #admin= yield
     #modal.modal
       .modal-header
         a.close data-dismiss="modal"

@@ -1,5 +1,5 @@
 - collapsed ||= false
-article id="post-#{post.id}" class="#{collapsed ? 'collapsed' : 'full'}"
+article id="post-#{post.id}" class="#{collapsed ? 'collapsed' : 'full'} post"
   - if post.external?
     h1.external
       - if @single_post

@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_author
-      current_blog.user
+      current_blog.try :user
     end
 
     def resolve_subdomain
