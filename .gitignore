@@ -27,3 +27,6 @@
 # Stupid configs for livereload
 /app/assets/*/config.rb
 /app/assets/*/*/config.rb
+
+# Locally uploaded files
+public/uploads
