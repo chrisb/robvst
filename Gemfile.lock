@@ -142,6 +142,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    marked-rails (0.2.9.0)
     method_source (0.8.2)
     mime-types (1.23)
     mini_magick (3.6.0)
@@ -265,6 +266,7 @@ DEPENDENCIES
   kaminari (~> 0.14)
   kramdown (~> 1.0)
   libv8
+  marked-rails
   mini_magick
   miro
   pg (~> 0.14)

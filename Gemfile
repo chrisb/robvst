@@ -16,6 +16,7 @@ gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'carrierwave'
 gem 'miro'
 gem 'mini_magick'
+gem 'marked-rails'
 
 # Markdown
 gem 'kramdown', '~> 1.0', require: false
