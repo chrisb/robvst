@@ -3,7 +3,7 @@ header.clearfix
     #effect style="background-image:url(#{current_blog.background.url});"
   = link_to 'Home', root_path, class: 'icon-home', id: 'home-link'
   #header-content
-    = image_tag avatar_url(current_user), class: 'avatar'
+    .avatar-container= image_tag avatar_url(current_user,120), class: 'avatar'
     h1= link_to current_blog.title, root_path
     h2= current_author.name
     p= current_author.about.html_safe if current_author.about.present?

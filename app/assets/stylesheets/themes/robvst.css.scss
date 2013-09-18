@@ -105,6 +105,11 @@ h3 {
   Place things inside #body to not affect the admin
 */
 
+body.posts #content {
+  margin-left: $header-width+$content-pad !important;
+  margin-right: $content-pad !important;
+}
+
 header {
   text-align: right;
   position: fixed;
@@ -124,7 +129,12 @@ header {
     margin-right: -30px;
   }
 
+  .avatar-container {
+    margin-bottom: 20px;
+  }
+
   #header-content {
+    width: 100%;
     position: absolute;
     top: 0;
     padding-top: $content-pad;
